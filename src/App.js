@@ -3,18 +3,19 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-        <header className="App-header">
-        <a
-            className="App-link"
-            href="https://starwars.ru/"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            Star Wars
-        </a>
-          </header>
+          <div className="App-header">
+              <div className="inner">
+                    <a
+                    className="App-link"
+                    href="https://starwars.ru/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Star Wars
+                  </a>
+              </div>
+          </div>
           <div className="App-body">
-                <tr>
+              <tr>
                     <td>
                         <button className="App-buttom">people</button>
                     </td>
