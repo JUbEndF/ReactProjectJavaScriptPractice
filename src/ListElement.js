@@ -16,8 +16,8 @@ class ListElement extends React.Component {
             isLoaded: false,
             count: 0,
             items: [],
-            next: "null",
-            previous: "null"
+            next: null,
+            previous: null
         };
     }
     componentDidMount() {
@@ -93,7 +93,7 @@ class ListElement extends React.Component {
                     this.setState({
                         isLoaded: true,
                         next: result.next,
-                        prev: result.previous,
+                        previous: result.previous,
                         count: result.count,
                         items: result.results
                     });
