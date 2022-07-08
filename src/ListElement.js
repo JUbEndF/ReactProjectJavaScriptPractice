@@ -16,8 +16,8 @@ class ListElement extends React.Component {
             isLoaded: false,
             count: 0,
             items: [],
-            next: null,
-            previous: null
+            next: "null",
+            previous: "null"
         };
     }
     componentDidMount() {
@@ -82,29 +82,29 @@ class ListElement extends React.Component {
         }
     }
 
-    handleClick(buttonName) {
-        switch (buttonName) {
-            case 'Next':
-                if (this.state.next != null) {
-                    root.render(
-                        <React.StrictMode>
-                            <ListElement url={this.state.next} />
-                        </React.StrictMode>
-                    );
-                }
-                break;
-            case 'Previous':
-                if (this.state.previous != null) {
-                    root.render(
-                        <React.StrictMode>
-                            <ListElement url={this.state.previous} />
-                        </React.StrictMode>
-                    );
-                }
-                break;
-            default:
-                break;
+    handleClick(url) {
+        if (url == null) {
+            return;
         }
+        fetch(url)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState({
+                        isLoaded: true,
+                        next: result.next,
+                        prev: result.previous,
+                        count: result.count,
+                        items: result.results
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            );
     }
 
     render() {
@@ -126,7 +126,7 @@ class ListElement extends React.Component {
                     </header>
                     <table align="center" cellSpacing="15">
                         <td>
-                            <button className="App-buttom" onClick={this.handleClick.bind(this, "Previous")}>Previous</button>
+                            <button className="App-buttom" onClick={this.handleClick.bind(this, this.state.previous)}>Previous</button>
                         </td>
                         <td>
                             {items.map(item =>
@@ -138,7 +138,7 @@ class ListElement extends React.Component {
                             }
                         </td>
                         <td>
-                            <button className="App-buttom" onClick={this.handleClick.bind(this, "Next")}>Next</button>
+                            <button className="App-buttom" onClick={this.handleClick.bind(this, this.state.next)}>Next</button>
                         </td>
                     </table>
                 </div>
