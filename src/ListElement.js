@@ -1,5 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import PeopleInfo from './PeopleInfo';
+import FilmInfo from './FilmInfo';
+import PlanetInfo from './PlanetInfo';
+import SpeciesInfo from './SpeciesInfo';
+import StarshipInfo from './StarshipInfo';
+import VehicleInfo from './VehicleInfo';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 class ListElement extends React.Component {
@@ -34,6 +40,46 @@ class ListElement extends React.Component {
                     });
                 }
             );
+    }
+
+    handleInfoClick(currentUrl) {
+        if (currentUrl.indexOf("people") !== -1) {
+            root.render(
+                <React.StrictMode>
+                    <PeopleInfo url={currentUrl} />
+                </React.StrictMode>
+            );
+        } else if (currentUrl.indexOf("starships") !== -1) {
+            root.render(
+                <React.StrictMode>
+                    <StarshipInfo url={currentUrl} />
+                </React.StrictMode>
+            );
+        } else if (currentUrl.indexOf("planets") !== -1) {
+            root.render(
+                <React.StrictMode>
+                    <PlanetInfo url={currentUrl} />
+                </React.StrictMode>
+            );
+        } else if (currentUrl.indexOf("vehicles") !== -1) {
+            root.render(
+                <React.StrictMode>
+                    <VehicleInfo url={currentUrl} />
+                </React.StrictMode>
+            );
+        } else if (currentUrl.indexOf("species") !== -1) {
+            root.render(
+                <React.StrictMode>
+                    <SpeciesInfo url={currentUrl} />
+                </React.StrictMode>
+            );
+        } else {
+            root.render(
+                <React.StrictMode>
+                    <FilmInfo url={currentUrl} />
+                </React.StrictMode>
+            );
+        }
     }
 
     handleClick(buttonName) {
@@ -85,7 +131,9 @@ class ListElement extends React.Component {
                         <td>
                             {items.map(item =>
                                 <tr key={item.name}>
-                                    <td> <button className="btn">{item.name}</button> </td>
+                                    <td>
+                                        <button className="App-buttom" onClick={this.handleInfoClick.bind(this, item.url)}>{item.name} {item.title}</button>
+                                    </td>
                                 </tr>)
                             }
                         </td>
